@@ -1,0 +1,6 @@
+{
+    "configuration": "PartitionScheme=huge_app,FlashMode=qio,FlashFreq=40,UploadSpeed=115200,DebugLevel=none",
+    "board": "esp32:esp32:esp32wrover",
+    "sketch": "ZakuHead5_ESP32.ino",
+    "port": "COM25"
+}
