@@ -1,4 +1,4 @@
-package com.google.mediapipe.examples.facedetection;
+package com.painnick.zakuhead5;
 
 import android.graphics.Bitmap;
 

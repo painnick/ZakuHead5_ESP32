@@ -1,7 +1,11 @@
-package com.google.mediapipe.examples.facedetection;
+package com.painnick.zakuhead5;
 
 import android.os.Process;
-import android.util.Log;
+
+import com.painnick.zakuhead5.SingleThreadHandlerExecutor;
+import com.painnick.zakuhead5.WebImageConsumer;
+import com.painnick.zakuhead5.ZakuHeadApi;
+import com.painnick.zakuhead5.ZakuHeadApiConsumer;
 
 import org.json.JSONException;
 
