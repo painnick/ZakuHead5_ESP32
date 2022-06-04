@@ -14,12 +14,14 @@
 
 package com.google.mediapipe.examples.facedetection;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
         setupStaticImageDemoUiComponents();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Wifi를 켜고, ZakuHead4에 연결해주세요.\n인터넷에 연결되지 않습니다.";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     @Override
