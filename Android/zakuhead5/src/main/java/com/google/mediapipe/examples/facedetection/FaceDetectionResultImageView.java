@@ -39,7 +39,7 @@ public class FaceDetectionResultImageView extends AppCompatImageView {
 
   public FaceDetectionResultImageView(Context context) {
     super(context);
-    setScaleType(AppCompatImageView.ScaleType.FIT_CENTER);
+    setScaleType(ScaleType.FIT_CENTER);
   }
 
   /**
