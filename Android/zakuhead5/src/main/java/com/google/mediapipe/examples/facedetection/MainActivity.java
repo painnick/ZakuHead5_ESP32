@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         FaceDetectionOptions.builder()
                                 .setStaticImageMode(true)
                                 .setModelSelection(0)
-                                .setMinDetectionConfidence(0.6f)
+                                .setMinDetectionConfidence(0.7f)
                                 .build());
 
         // Connects MediaPipe Face Detection solution to the user-defined FaceDetectionResultImageView.
