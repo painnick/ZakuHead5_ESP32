@@ -1,4 +1,3 @@
 <resources>
-    <string name="start" translatable="false">Start</string>
     <string name="instruction" translatable="false">Please press any button above to start</string>
 </resources>

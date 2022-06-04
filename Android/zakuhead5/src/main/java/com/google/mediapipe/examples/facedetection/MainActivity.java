@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        zakuHeadController.start();
     }
 
     @Override
@@ -92,12 +94,6 @@ public class MainActivity extends AppCompatActivity {
         setupStaticImageModePipeline();
         zakuHeadController = new ZakuHeadController(bitmap -> faceDetection.send(bitmap), response -> {
         });
-
-        Button loadImageButton = findViewById(R.id.button_start);
-        loadImageButton.setOnClickListener(
-                v -> {
-                    zakuHeadController.start();
-                });
     }
 
     /**
