@@ -187,10 +187,6 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout frameLayout = findViewById(R.id.preview_display_layout);
         frameLayout.removeAllViewsInLayout();
         imageView.setImageDrawable(null);
-
-//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        imageView.setLayoutParams(layoutParams);
-
         frameLayout.addView(imageView);
         imageView.setVisibility(View.VISIBLE);
     }
