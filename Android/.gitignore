@@ -1,3 +1,5 @@
 .gradle
 .idea
 build/
+/zakuhead5/debug/
+/zakuhead5/release/
