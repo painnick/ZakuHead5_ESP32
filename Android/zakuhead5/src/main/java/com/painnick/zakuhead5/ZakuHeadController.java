@@ -81,15 +81,15 @@ public class ZakuHeadController {
         zakuHeadApi.moveRight(degree, found);
     }
 
-    public void ledOn() {
-        if (!isLedOn) {
+    public void ledOn(boolean forced) {
+        if (forced || !isLedOn) {
             zakuHeadApi.led(10);
         }
         isLedOn = true;
     }
 
-    public void ledOff() {
-        if (isLedOn) {
+    public void ledOff(boolean forced) {
+        if (forced || isLedOn) {
             zakuHeadApi.led(0);
         }
         isLedOn = false;

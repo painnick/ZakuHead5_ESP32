@@ -1,3 +1,5 @@
 <resources>
     <string name="instruction" translatable="false">Please press any button above to start</string>
+    <string name="move_left" translatable="false">Left</string>
+    <string name="move_right" translatable="false">Right</string>
 </resources>

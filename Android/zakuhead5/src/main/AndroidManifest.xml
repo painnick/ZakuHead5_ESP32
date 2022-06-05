@@ -4,7 +4,7 @@
 
   <uses-sdk
       android:minSdkVersion="21"
-      android:targetSdkVersion="30" />
+      android:targetSdkVersion="31" />
 
   <!-- For loading images from gallery -->
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -24,7 +24,8 @@
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true">
     <activity android:name="com.painnick.zakuhead5.MainActivity"
-              android:screenOrientation="landscape">
+              android:screenOrientation="landscape"
+              android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

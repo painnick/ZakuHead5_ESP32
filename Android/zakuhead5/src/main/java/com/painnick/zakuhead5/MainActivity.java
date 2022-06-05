@@ -48,13 +48,15 @@ public class MainActivity extends AppCompatActivity {
     // Image demo UI and image loader components.
     private FaceDetectionResultImageView imageView;
 
-    private Date faceLost;
+    private Date lastDetection, startFoundSeq, startNotFoundSeq;
     private FACE_DIRECTION faceDirection = FACE_DIRECTION.NONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        faceLost = new Date();
         super.onCreate(savedInstanceState);
+        lastDetection = new Date();
+        startFoundSeq = null;
+        startNotFoundSeq = null;
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
         setupStaticImageDemoUiComponents();
@@ -86,6 +88,18 @@ public class MainActivity extends AppCompatActivity {
         setupStaticImageModePipeline();
         zakuHeadController = new ZakuHeadController(bitmap -> faceDetection.send(bitmap), response -> {
         });
+
+        // 버튼과 화면과 위치가 반대임에 유의!
+        findViewById(R.id.move_left).setOnClickListener(
+                v -> {
+                    faceDirection = FACE_DIRECTION.RIGHT;
+                    zakuHeadController.moveRight(15, false);
+                });
+        findViewById(R.id.move_right).setOnClickListener(
+                v -> {
+                    faceDirection = FACE_DIRECTION.LEFT;
+                    zakuHeadController.moveLeft(15, false);
+                });
     }
 
     /**
@@ -119,28 +133,43 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     if (foundDetection != null) { // Found!!!
-                        zakuHeadController.ledOn();
+                        boolean isStartSeq = (startFoundSeq == null);
+                        if (isStartSeq) {
+                            startFoundSeq = new Date();
+                            startNotFoundSeq = null;
+                        }
+                        zakuHeadController.ledOn(isStartSeq);
                         LocationDataProto.LocationData.RelativeBoundingBox box = foundDetection.getLocationData().getRelativeBoundingBox();
                         float center = box.getXmin() + (box.getWidth() / 2);
 
                         if (0.4f > center || center > 0.6f) {
                             if (center > 0.5) {
                                 faceDirection = FACE_DIRECTION.RIGHT;
-                                zakuHeadController.moveRight(10, true);
+                                zakuHeadController.moveRight(5, true);
                             } else {
                                 faceDirection = FACE_DIRECTION.LEFT;
-                                zakuHeadController.moveLeft(10, true);
+                                zakuHeadController.moveLeft(5, true);
+                            }
+                        } else {
+                            Date now = new Date();
+                            // 일정 시간동안 얼굴을 찾고 있더라도 찾았다는 사실을 알림
+                            if (((now.getTime() - startFoundSeq.getTime()) / 1000) % 3 == 1) {
+                                zakuHeadController.moveLeft(0, true);
                             }
                         }
-                        faceLost = new Date(); // Lost Start!
+                        lastDetection = new Date();
                     } else {
                         Date now = new Date();
-                        long sec = (now.getTime() - faceLost.getTime()) / 1000;
-                        // 일정 시간동안 얼굴을 찾지 못하면 놓친 것으로 판단
-                        if (sec > 2) {
-                            faceLost = new Date(); // Lost Start!
-                            zakuHeadController.ledOff();
+                        long lostSeconds = (now.getTime() - lastDetection.getTime()) / 1000;
+
+                        // LOST!!!
+                        if ((startNotFoundSeq == null) && (lostSeconds > 2)) {
+                            startFoundSeq = null;
+                            startNotFoundSeq = new Date();
+                            zakuHeadController.ledOff(true);
                         }
+
+                        // 기존 방향으로 카메라 이동
                         int lastAngle = zakuHeadController.getLastAngle();
                         if ((20 < lastAngle) && (lastAngle < 160)) {
                             if (faceDirection == FACE_DIRECTION.RIGHT) {
