@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.mediapipe.examples.facedetection.R;
+//import com.google.mediapipe.examples.facedetection.R;
 import com.google.mediapipe.formats.proto.DetectionProto;
 import com.google.mediapipe.formats.proto.LocationDataProto;
 import com.google.mediapipe.solutions.facedetection.FaceDetection;
