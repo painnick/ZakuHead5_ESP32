@@ -63,6 +63,9 @@ public class FaceDetectionResultImageView extends AppCompatImageView {
     for (int i = 0; i < numDetectedFaces; ++i) {
       drawDetectionOnCanvas(result.multiFaceDetections().get(i), canvas, width, height);
     }
+
+    // 좌우 전환
+    canvas.scale(-1, 1, width, height);
   }
 
   /** Updates the image view with the latest {@link FaceDetectionResult}. */
